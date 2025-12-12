@@ -1,57 +1,55 @@
+# Pet-Study-and-Analysis
+Analytical study on the impact of prevention and care measures to achieve better longevity in pets.
 
-# Estudio-y-Analisis-de-Mascotas
-Estudio de análisis sobre el impacto de medidas de prevencion y cuidado para lograr una mejor longevidad en mascotas.
+This repository contains:
 
-El presente repositorio contiene:
-- index.html: Dashboard de análisis general.
-- analisis_detallado: Dashboard de análisis con métricas detalladas.
-- modelo_entrenamiento: Código base de ejecución de modelo de entrenamiento para analizar la muestra de datos de 3000 ingresos provenientes del dataset PetFinder.
+- index.html: General analysis dashboard.
+- detailed_analysis: Analysis dashboard with detailed metrics.
+- training_model: Base code for running the training model to analyze the sample of 3000 entries from the PetFinder dataset.
 
-## METODOLOGÍAS USADAS
+## Methodologies used
+Data sources:
+- PetFinder Dataset: Information on pets available for adoption (age, breed, medical history)
+- Veterinary Medical Databases: Anonymous records of veterinary diagnoses
+- Owner surveys: Data on feeding, exercise, and home environment
+- Climate and geographic data: Influence of the environment on animal health
+- Longitudinal studies on pet aging
 
-Fuentes de datos:
-- Dataset PetFinder: Información de mascotas en adopción (edad, raza, historial médico)
-- Veterinary Medical Databases: Registros anónimos de diagnósticos veterinarios
-- Encuestas a dueños: Datos sobre alimentación, ejercicio, ambiente familiar
-- Datos climáticos y geográficos: Influencia del entorno en la salud animal
-- Estudios longitudinales sobre envejecimiento de mascotas
+### Key variables to analyze:
+- Demographic: Species, breed, age, weight, sex
+- Environmental: Type of housing, outdoor access, climate
+- Care-related: Veterinary visit frequency, type of diet, physical activity
+- Health: Chronic diseases, vaccination, sterilization
 
-Variables clave a analizar:
-- Demográficas: Especie, raza, edad, peso, sexo
-- Ambientales: Tipo de vivienda, acceso al exterior, clima
-- Cuidados: Frecuencia veterinaria, tipo de alimentación, actividad física
-- Salud: Enfermedades crónicas, vacunación, esterilización
+## Tentative analysis structure
+### Phase 1: Descriptive Analysis
+- Age distribution by species and breed
+- Most common diseases by age group
+- Geographic patterns in longevity
 
-Estructura tentativa del análisis
-Fase 1: Análisis Descriptivo
-- Distribución de edades por especie y raza
-- Enfermedades más comunes por grupo etario
-- Patrones geográficos en la longevidad
+### Phase 2: Correlation Analysis
+- Relationship between sterilization and life expectancy
+- Impact of body weight on joint diseases
+- Correlation between veterinary visits and early detection
 
-Fase 2: Análisis de Correlación
-- Relación entre esterilización y esperanza de vida
-- Impacto del peso corporal en enfermedades articulares
-- Correlación entre visitas veterinarias y detección temprana
-
-Fase 3: Modelado Predictivo
+### Phase 3: Predictive Modeling
 ```python
 from pyspark.ml.regression import RandomForestRegressor
 from pyspark.ml.feature import VectorAssembler
 
-# Predecir esperanza de vida basado en características
+# Predict life expectancy based on key features
 assembler = VectorAssembler(
     inputCols=['raza_encoded', 'peso', 'esterilizado', 'frecuencia_veterinario'],
     outputCol='features'
 )
 ```
 
-Fase 4: Visualización Educativa
-- Dashboard interactivo para dueños de mascotas
-- Guías de cuidado por etapa de vida
-- Alertas tempranas de enfermedades comunes
+### Phase 4: Educational Visualization
+- Interactive dashboard for pet owners
+- Care guides by life stage
+- Early alerts for common diseases
 
-
-## Referencias y datasets iniciales
+## References and initial datasets
 - PetFinder Dataset (Kaggle)
 - Veterinary Medical Database (VMDB)
 - Banfield Pet Hospital State of Pet Health
