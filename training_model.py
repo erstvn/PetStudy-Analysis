@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Proyecto Final - Analisis de Datos.ipynb"""
 
 # %% [code]
-# CELDA DE CONFIGURACIÓN COMPATIBLE - EJECUTAR PRIMERO
 !pip install --upgrade numpy scipy seaborn
 !pip install opendatasets kaggle -q
 
