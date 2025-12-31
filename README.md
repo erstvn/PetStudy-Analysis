@@ -1,5 +1,5 @@
 # Pet-Study-and-Analysis
-![En Desarrollo](https://img.shields.io/badge/Estado-Desarrollo-yellow) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![In Development](https://img.shields.io/badge/state-development-yellow) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ⚠️ **IMPORTANT: LICENSE UPDATE** ⚠️
 
