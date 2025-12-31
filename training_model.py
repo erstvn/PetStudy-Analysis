@@ -119,7 +119,7 @@ print("\n🔍 Primeras filas:")
 display(df.head())
 
 # %% [markdown]
-# ## 2. Análisis Exploratorio Inicial
+# ## 2. Initial Exploratory Analysis
 
 # %% [code]
 print("📊 ANÁLISIS EXPLORATORIO INICIAL")
@@ -141,31 +141,31 @@ for speed, count in adoption_dist.items():
     print(f"  {speed_names.get(speed, speed)}: {count} mascotas ({pct:.1f}%)")
 
 # %% [markdown]
-# ## 3. Preprocesamiento de Datos
+# ## 3. Data Preprocessing
 
 # %% [code]
 print("🔄 PREPROCESAMIENTO DE DATOS")
 print("="*50)
 
-# Crear copia para procesamiento
+# Create copy for processing
 df_processed = df.copy()
 
-# 1. Convertir edad a años
+# 1. Convert age to years
 df_processed['Age_Years'] = df_processed['Age'] / 12
 
-# 2. Crear categorías de edad
+# 2. Create age categories
 df_processed['Age_Category'] = pd.cut(
     df_processed['Age_Years'],
     bins=[0, 1, 3, 7, 15, 25],
     labels=['Cachorro', 'Joven', 'Adulto', 'Maduro', 'Senior']
 )
 
-# 3. Determinar especie basado en Breed1
+# 3. Determine species based on Breed1
 df_processed['Species'] = df_processed['Breed1'].apply(
     lambda x: 'Dog' if x <= 25 else 'Cat'
 )
 
-# 4. Calcular puntaje de salud
+# 4. Calculate health score
 df_processed['Health_Score'] = (
     (df_processed['Vaccinated'] == 1).astype(int) +
     (df_processed['Dewormed'] == 1).astype(int) +
@@ -173,15 +173,15 @@ df_processed['Health_Score'] = (
     (df_processed['Health'] == 1).astype(int)
 )
 
-# 5. Categorías de tamaño
+# 5. Size Categories
 size_map = {1: 'Pequeño', 2: 'Mediano', 3: 'Grande', 4: 'Extra Grande'}
 df_processed['Size_Category'] = df_processed['MaturitySize'].map(size_map)
 
-# 6. Estado de salud
+# 6. Health status
 health_map = {1: 'Saludable', 2: 'Problemas menores', 3: 'Problemas serios'}
 df_processed['Health_Status'] = df_processed['Health'].map(health_map)
 
-# 7. Género como texto
+# 7. Gender as text
 gender_map = {1: 'Macho', 2: 'Hembra'}
 df_processed['Gender_Text'] = df_processed['Gender'].map(gender_map)
 
@@ -192,7 +192,7 @@ new_columns = [col for col in df_processed.columns if col not in df.columns]
 print(new_columns)
 
 # %% [markdown]
-# ## 4. Visualizaciones Principales
+# ## 4. Main Visualizations
 
 # %% [code]
 print("📊 VISUALIZACIONES PRINCIPALES")
@@ -200,33 +200,33 @@ print("="*50)
 
 fig, axes = plt.subplots(2, 3, figsize=(18, 12))
 
-# 1. Distribución de especies
+# 1. Species distribution
 species_count = df_processed['Species'].value_counts()
 axes[0,0].pie(species_count.values, labels=species_count.index, autopct='%1.1f%%', startangle=90)
 axes[0,0].set_title('Distribución por Especie')
 
-# 2. Distribución de edad
+# 2. Age distribution
 axes[0,1].hist(df_processed['Age_Years'], bins=20, alpha=0.7, color='skyblue', edgecolor='black')
 axes[0,1].set_title('Distribución de Edad')
 axes[0,1].set_xlabel('Edad (años)')
 axes[0,1].set_ylabel('Frecuencia')
 
-# 3. Velocidad de adopción
+# 3. Speed ​​of adoption
 adoption_count = df_processed['AdoptionSpeed'].value_counts().sort_index()
 axes[0,2].bar(adoption_count.index, adoption_count.values, color='lightgreen', alpha=0.7)
 axes[0,2].set_title('Velocidad de Adopción')
 axes[0,2].set_xlabel('Velocidad')
 axes[0,2].set_ylabel('Cantidad')
 
-# 4. Salud por especie
+# 4. Health by species
 sns.boxplot(data=df_processed, x='Species', y='Health_Score', ax=axes[1,0])
 axes[1,0].set_title('Puntaje de Salud por Especie')
 
-# 5. Edad vs Adopción
+# 5. Age vs Adoption
 sns.boxplot(data=df_processed, x='AdoptionSpeed', y='Age_Years', ax=axes[1,1])
 axes[1,1].set_title('Edad vs Velocidad de Adopción')
 
-# 6. Salud vs Adopción
+# 6. Health vs Adoption
 sns.boxplot(data=df_processed, x='AdoptionSpeed', y='Health_Score', ax=axes[1,2])
 axes[1,2].set_title('Salud vs Velocidad de Adopción')
 
@@ -234,10 +234,10 @@ plt.tight_layout()
 plt.show()
 
 # %% [code]
-# Visualizaciones adicionales
+# Additional views
 fig, axes = plt.subplots(2, 2, figsize=(15, 10))
 
-# 1. Adopción por especie
+# 1. Adoption by species
 adoption_species = pd.crosstab(df_processed['AdoptionSpeed'], df_processed['Species'])
 adoption_species.plot(kind='bar', ax=axes[0,0])
 axes[0,0].set_title('Adopción por Especie')
@@ -245,7 +245,7 @@ axes[0,0].set_xlabel('Velocidad de Adopción')
 axes[0,0].set_ylabel('Cantidad')
 axes[0,0].legend(title='Especie')
 
-# 2. Adopción por tamaño
+# 2. Adoption by size
 adoption_size = pd.crosstab(df_processed['AdoptionSpeed'], df_processed['Size_Category'])
 adoption_size.plot(kind='bar', ax=axes[0,1])
 axes[0,1].set_title('Adopción por Tamaño')
@@ -253,14 +253,14 @@ axes[0,1].set_xlabel('Velocidad de Adopción')
 axes[0,1].set_ylabel('Cantidad')
 axes[0,1].legend(title='Tamaño')
 
-# 3. Correlaciones
+# 3. Correlations
 numeric_cols = ['Age_Years', 'Health_Score', 'Fee', 'PhotoAmt', 'AdoptionSpeed']
 correlation = df_processed[numeric_cols].corr()
 sns.heatmap(correlation, annot=True, cmap='coolwarm', center=0, square=True,
             fmt='.2f', cbar_kws={'shrink': 0.8}, ax=axes[1,0])
 axes[1,0].set_title('Matriz de Correlación')
 
-# 4. Tarifas vs Adopción
+# 4. Fees vs Adoption
 sns.scatterplot(data=df_processed, x='Fee', y='AdoptionSpeed', alpha=0.6, ax=axes[1,1])
 axes[1,1].set_title('Tarifas vs Velocidad de Adopción')
 axes[1,1].set_xlabel('Tarifa')
@@ -270,7 +270,7 @@ plt.tight_layout()
 plt.show()
 
 # %% [markdown]
-# ## 5. Análisis Estadístico
+# ## 5. Statistical Analysis
 
 # %% [code]
 print("📈 ANÁLISIS ESTADÍSTICO")
@@ -294,13 +294,13 @@ for feature, corr in correlations.items():
         strength = "fuerte" if abs(corr) > 0.5 else "moderada" if abs(corr) > 0.3 else "débil"
         print(f"  {feature}: {corr:.3f} ({strength} {direction})")
 
-# Tasa de adopción rápida
+# Rapid adoption rate
 fast_adoption = len(df_processed[df_processed['AdoptionSpeed'] <= 2])
 fast_rate = (fast_adoption / len(df_processed)) * 100
 print(f"\n🚀 Tasa de adopción rápida (≤2): {fast_adoption:,} mascotas ({fast_rate:.1f}%)")
 
 # %% [markdown]
-# ## 6. Modelado Predictivo Simple
+# ## 6. Simple Predictive Modeling
 
 # %% [code]
 print("🤖 MODELADO PREDICTIVO")
@@ -370,7 +370,7 @@ results_df = pd.DataFrame(results).T
 display(results_df.round(4))
 
 # %% [code]
-# Visualizar resultados de modelos
+# View model results
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
 # R² Score
@@ -388,7 +388,7 @@ axes[1].tick_params(axis='x', rotation=45)
 plt.tight_layout()
 plt.show()
 
-# Importancia de características (solo para RandomForest)
+# Importance of features (only for RandomForest)
 if 'RandomForest' in models:
     rf_model = models['RandomForest']
     feature_importance = pd.DataFrame({
@@ -414,12 +414,10 @@ if 'RandomForest' in models:
 print("🎯 ANÁLISIS DE SEGMENTOS")
 print("="*50)
 
-# Verificar que df_processed existe
 if 'df_processed' not in locals() and 'df_processed' not in globals():
     print("❌ Error: df_processed no está definido")
     print("🔄 Ejecutando preprocesamiento...")
 
-    # Ejecutar preprocesamiento si no existe
     preprocessor = ColabDataPreprocessor()
     df_processed = preprocessor.preprocess_data(df)
 else:
@@ -435,7 +433,6 @@ if 'df_processed' in locals() or 'df_processed' in globals():
         print(f"❌ Faltan columnas: {missing_columns}")
         print("🔄 Creando columnas faltantes...")
 
-        # Crear columnas faltantes si es necesario
         if 'Health_Score' not in df_processed.columns and 'Health_Care_Score' in df_processed.columns:
             df_processed['Health_Score'] = df_processed['Health_Care_Score']
 
@@ -452,7 +449,7 @@ else:
     # Salir del análisis si no hay datos
     raise NameError("df_processed no está disponible para el análisis de segmentos")
 
-# Analizar segmentos por especie y tamaño
+# Analyze segments by species and size
 segments = {}
 
 for species in df_processed['Species'].unique():
@@ -491,28 +488,28 @@ print("📊 RESUMEN DE SEGMENTOS:")
 display(segment_df.round(2))
 
 # %% [code]
-# Visualizar segmentos con heatmaps
+# Visualize segments with heatmaps
 print("📈 Generando visualizaciones de segmentos...")
 
 fig, axes = plt.subplots(2, 2, figsize=(15, 10))
 
 try:
-    # Cantidad por segmento
+    # Quantity per segment
     pivot_count = segment_df.pivot(index='Species', columns='Size', values='Count')
     sns.heatmap(pivot_count, annot=True, fmt='.0f', cmap='Blues', ax=axes[0,0])
     axes[0,0].set_title('Cantidad de Mascotas por Segmento')
 
-    # Tasa de adopción
+    # Adoption rate
     pivot_rate = segment_df.pivot(index='Species', columns='Size', values='Adoption_Rate')
     sns.heatmap(pivot_rate, annot=True, fmt='.2%', cmap='YlGnBu', ax=axes[0,1])
     axes[0,1].set_title('Tasa de Adopción por Segmento')
 
-    # Velocidad de adopción
+    # Speed ​​of adoption
     pivot_speed = segment_df.pivot(index='Species', columns='Size', values='Avg_Adoption_Speed')
     sns.heatmap(pivot_speed, annot=True, fmt='.2f', cmap='RdYlBu_r', ax=axes[1,0])
     axes[1,0].set_title('Velocidad de Adopción Promedio')
 
-    # Edad promedio
+    # Average age
     pivot_age = segment_df.pivot(index='Species', columns='Size', values='Avg_Age')
     sns.heatmap(pivot_age, annot=True, fmt='.1f', cmap='viridis', ax=axes[1,1])
     axes[1,1].set_title('Edad Promedio por Segmento')
@@ -525,26 +522,26 @@ except Exception as e:
     print(f"❌ Error en visualizaciones: {e}")
     print("🔄 Generando visualizaciones alternativas...")
 
-    # Visualizaciones alternativas simples
+    # Simple alternative visualizations
     fig, axes = plt.subplots(2, 2, figsize=(15, 10))
 
-    # Gráfico de barras para cantidad
+    # Bar chart for quantity
     segment_df.groupby('Species')['Count'].sum().plot(kind='bar', ax=axes[0,0], color='lightblue')
     axes[0,0].set_title('Cantidad por Especie')
     axes[0,0].set_ylabel('Cantidad')
 
-    # Gráfico de barras para tasa de adopción
+    # Bar chart for adoption rate
     segment_df.groupby('Species')['Adoption_Rate'].mean().plot(kind='bar', ax=axes[0,1], color='lightgreen')
     axes[0,1].set_title('Tasa de Adopción Promedio por Especie')
     axes[0,1].set_ylabel('Tasa de Adopción')
 
-    # Gráfico de dispersión edad vs adopción
+    # Scatter plot of age vs adoption
     axes[1,0].scatter(segment_df['Avg_Age'], segment_df['Adoption_Rate'], alpha=0.6)
     axes[1,0].set_xlabel('Edad Promedio')
     axes[1,0].set_ylabel('Tasa de Adopción')
     axes[1,0].set_title('Edad vs Tasa de Adopción')
 
-    # Gráfico de salud vs adopción
+    # Health vs. Adoption Chart
     axes[1,1].scatter(segment_df['Avg_Health'], segment_df['Adoption_Rate'], alpha=0.6, color='red')
     axes[1,1].set_xlabel('Salud Promedio')
     axes[1,1].set_ylabel('Tasa de Adopción')
@@ -554,19 +551,17 @@ except Exception as e:
     plt.show()
 
 # %% [markdown]
-# ## 8. Recomendaciones y Conclusiones
+# ## 8. Recommendations and Conclusions
 
 # %% [code]
 print("💡 RECOMENDACIONES ESTRATÉGICAS")
 print("="*50)
 
-# Verificar que tenemos los resultados del modelo
 if 'results' not in locals() and 'results' not in globals():
     print("⚠️  No hay resultados de modelos disponibles")
     results = {}
     results_df = pd.DataFrame()
 
-# Identificar segmentos problemáticos
 problem_segments = []
 high_performance_segments = []
 
@@ -617,7 +612,7 @@ print(f"\n🔍 HALLAZGOS PRINCIPALES:")
 print(f"  1. 📊 Dataset analizado: {len(df_processed):,} mascotas")
 print(f"  2. 🎯 Tasa adopción general: {(df_processed['AdoptionSpeed'] <= 2).mean():.1%}")
 
-# Análisis de correlaciones importantes
+# Analysis of important correlations
 try:
     health_corr = df_processed['Health_Score'].corr(df_processed['AdoptionSpeed'])
     age_corr = df_processed['Age_Years'].corr(df_processed['AdoptionSpeed'])
@@ -653,7 +648,7 @@ print(f"  El enfoque en factores clave puede mejorar significativamente")
 print(f"  la efectividad de los programas.")
 
 # %% [markdown]
-# ## 9. Resumen Ejecutivo Final
+# ## 9. Final Executive Summary
 
 # %% [code]
 print("🎯 RESUMEN EJECUTIVO FINAL")
@@ -696,7 +691,7 @@ print(f"  3. Establecer sistema de monitoreo")
 print(f"  4. Reevaluar en 3 meses")
 
 # %% [markdown]
-# ## 10. Exportación de Resultados
+# ## 10. Exporting Results
 
 # %% [code]
 try:
