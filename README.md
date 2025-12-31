@@ -1,5 +1,4 @@
 # Pet-Study-and-Analysis
-Analytical study on the impact of prevention and care measures to achieve better longevity in pets.
 
 This repository contains:
 
