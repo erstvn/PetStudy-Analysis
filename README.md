@@ -1,9 +1,20 @@
+# Pet-Study-and-Analysis
 ![En Desarrollo](https://img.shields.io/badge/Estado-Desarrollo-yellow) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-# Pet-Study-and-Analysis
+⚠️ **IMPORTANT: LICENSE UPDATE** ⚠️
 
+**All versions of this project**, including commits and releases prior to this update, are now covered under the **Apache License 2.0**.
 
-This repository contains:
+- ✅ Previous versions (v1.0, v0.5, etc.)
+- ✅ All historical commits
+- ✅ Past tags and releases
+- ✅ Forks created before this date
+
+**Effective Date**: [December 31, 2025]  
+**Applicable License**: Apache License 2.0  
+**Retroactive Coverage**: Yes
+
+### This repository contains:
 
 [index.html](index.html): General analysis dashboard.  
 
