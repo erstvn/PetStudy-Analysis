@@ -2,7 +2,7 @@
 
 This repository contains:
 
-<ins>index.html</ins>: General analysis dashboard.  
+[index.html](index.html): General analysis dashboard.  
 
 <ins>training_model</ins>: Base code for running the training model to analyze the sample of 3000 entries from the PetFinder dataset.
 
