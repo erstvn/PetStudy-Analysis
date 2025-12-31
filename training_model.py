@@ -34,7 +34,7 @@ except Exception as e:
     print("✅ Reinstalación completada. Por favor reinicia el runtime manualmente.")
 
 # %% [markdown]
-# # Análisis de Longevidad de Mascotas - Google Colab
+# # Análisis de Longevidad de Mascotas
 # ## Configuración del Entorno
 #
 # Este notebook analiza los factores que influyen en la longevidad y adopción de mascotas.
@@ -43,7 +43,6 @@ except Exception as e:
 # Instalación de paquetes básicos (evitando conflictos)
 !pip install opendatasets kaggle -q
 
-# Importar librerías estándar de Colab
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -51,7 +50,6 @@ import seaborn as sns
 from google.colab import files
 import os
 
-# Scikit-learn (ya viene instalado en Colab)
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
@@ -62,7 +60,7 @@ from sklearn.impute import SimpleImputer
 import warnings
 warnings.filterwarnings('ignore')
 
-# Configurar estilo de visualizaciones
+# Estilo de visualizaciones
 plt.style.use('default')
 sns.set_palette("husl")
 plt.rcParams['figure.figsize'] = (12, 8)
@@ -80,7 +78,7 @@ def create_simple_sample_dataset():
     np.random.seed(42)
     n_samples = 3000  # Tamaño óptimo para demostración
 
-    # Crear datos base
+    # Base de datos
     sample_data = pd.DataFrame({
         'PetID': [f'PET_{i:05d}' for i in range(n_samples)],
         'Age': np.random.randint(1, 180, n_samples),
@@ -95,7 +93,7 @@ def create_simple_sample_dataset():
         'PhotoAmt': np.random.randint(1, 10, n_samples)
     })
 
-    # Crear AdoptionSpeed con lógica realista
+    
     adoption_speed = np.zeros(n_samples)
 
     # Factores que aceleran la adopción
@@ -125,7 +123,6 @@ def create_simple_sample_dataset():
 
     return sample_data
 
-# Crear dataset
 df = create_simple_sample_dataset()
 
 print("✅ Dataset de muestra creado exitosamente")
@@ -140,17 +137,14 @@ display(df.head())
 print("📊 ANÁLISIS EXPLORATORIO INICIAL")
 print("="*50)
 
-# Información básica
 print(f"Total de registros: {len(df):,}")
 print(f"Total de características: {len(df.columns)}")
 print(f"\nValores faltantes por columna:")
 print(df.isnull().sum())
 
-# Estadísticas descriptivas
 print(f"\n📈 Estadísticas descriptivas:")
 print(df.describe())
 
-# Distribución de la variable objetivo
 print(f"\n🎯 Distribución de AdoptionSpeed:")
 adoption_dist = df['AdoptionSpeed'].value_counts().sort_index()
 for speed, count in adoption_dist.items():
@@ -216,7 +210,6 @@ print(new_columns)
 print("📊 VISUALIZACIONES PRINCIPALES")
 print("="*50)
 
-# Configurar subplots
 fig, axes = plt.subplots(2, 3, figsize=(18, 12))
 
 # 1. Distribución de especies
@@ -295,7 +288,6 @@ plt.show()
 print("📈 ANÁLISIS ESTADÍSTICO")
 print("="*50)
 
-# Estadísticas por especie
 print("📊 ESTADÍSTICAS POR ESPECIE:")
 species_stats = df_processed.groupby('Species').agg({
     'AdoptionSpeed': ['mean', 'std'],
@@ -306,7 +298,6 @@ species_stats = df_processed.groupby('Species').agg({
 
 print(species_stats)
 
-# Análisis de correlación con AdoptionSpeed
 print(f"\n🔗 CORRELACIONES CON ADOPCIÓN:")
 correlations = df_processed[numeric_cols].corr()['AdoptionSpeed'].sort_values(ascending=False)
 for feature, corr in correlations.items():
@@ -327,10 +318,8 @@ print(f"\n🚀 Tasa de adopción rápida (≤2): {fast_adoption:,} mascotas ({fa
 print("🤖 MODELADO PREDICTIVO")
 print("="*50)
 
-# Preparar características
 features = ['Age_Years', 'Health_Score', 'Fee', 'PhotoAmt', 'MaturitySize']
 
-# Codificar variables categóricas si es necesario
 le_species = LabelEncoder()
 le_size = LabelEncoder()
 
@@ -346,7 +335,6 @@ y = df_model['AdoptionSpeed']
 print(f"✅ Características seleccionadas: {len(features)}")
 print(f"Características: {features}")
 
-# Dividir datos
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
@@ -354,7 +342,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 print(f"📊 Conjunto de entrenamiento: {X_train.shape[0]} registros")
 print(f"📊 Conjunto de prueba: {X_test.shape[0]} registros")
 
-# Entrenar modelos
 models = {
     'RandomForest': RandomForestRegressor(n_estimators=50, random_state=42),
     'LinearRegression': LinearRegression()
@@ -365,13 +352,10 @@ results = {}
 for name, model in models.items():
     print(f"\n🎯 Entrenando {name}...")
 
-    # Entrenar
     model.fit(X_train, y_train)
 
-    # Predecir
     y_pred = model.predict(X_test)
 
-    # Métricas
     mae = mean_absolute_error(y_test, y_pred)
     mse = mean_squared_error(y_test, y_pred)
     rmse = np.sqrt(mse)
@@ -393,7 +377,6 @@ for name, model in models.items():
     print(f"   ✅ MAE: {mae:.4f}")
     print(f"   ✅ Validación cruzada: {cv_scores.mean():.4f} ± {cv_scores.std():.4f}")
 
-# Mostrar resultados comparativos
 print(f"\n📊 COMPARACIÓN DE MODELOS:")
 results_df = pd.DataFrame(results).T
 display(results_df.round(4))
@@ -428,7 +411,6 @@ if 'RandomForest' in models:
     print(f"\n🔍 IMPORTANCIA DE CARACTERÍSTICAS (RandomForest):")
     display(feature_importance)
 
-    # Gráfico de importancia
     plt.figure(figsize=(10, 6))
     plt.barh(feature_importance['feature'], feature_importance['importance'], color='skyblue')
     plt.xlabel('Importancia')
@@ -455,11 +437,9 @@ if 'df_processed' not in locals() and 'df_processed' not in globals():
 else:
     print("✅ df_processed disponible")
 
-# Verificar que tenemos los datos necesarios
 if 'df_processed' in locals() or 'df_processed' in globals():
     print(f"📊 Dataset disponible: {df_processed.shape}")
 
-    # Verificar que tenemos las columnas necesarias
     required_columns = ['Species', 'Size_Category', 'Age_Years', 'Health_Score', 'AdoptionSpeed', 'Fee']
     missing_columns = [col for col in required_columns if col not in df_processed.columns]
 
@@ -504,7 +484,6 @@ for species in df_processed['Species'].unique():
                 'avg_fee': segment_data['Fee'].mean()
             }
 
-# Mostrar segmentos
 segment_list = []
 for species, sizes in segments.items():
     for size, metrics in sizes.items():
@@ -619,7 +598,6 @@ for species, sizes in segments.items():
                 'adoption_rate': metrics['adoption_rate']
             })
 
-# Recomendaciones para segmentos problemáticos
 if problem_segments:
     print("🚨 SEGMENTOS QUE REQUIEREN ATENCIÓN:")
     for seg in problem_segments:
@@ -639,7 +617,6 @@ if problem_segments:
 else:
     print("✅ Todos los segmentos tienen buen desempeño")
 
-# Segmentos de alto desempeño
 if high_performance_segments:
     print(f"\n✅ SEGMENTOS DE ALTO DESEMPEÑO:")
     for seg in high_performance_segments:
@@ -648,7 +625,6 @@ if high_performance_segments:
 else:
     print(f"\n📊 TODOS LOS SEGMENTOS ANALIZADOS:")
 
-# Hallazgos generales
 print(f"\n🔍 HALLAZGOS PRINCIPALES:")
 print(f"  1. 📊 Dataset analizado: {len(df_processed):,} mascotas")
 print(f"  2. 🎯 Tasa adopción general: {(df_processed['AdoptionSpeed'] <= 2).mean():.1%}")
@@ -667,7 +643,6 @@ try:
 except Exception as e:
     print(f"⚠️  No se pudieron calcular correlaciones: {e}")
 
-# Importancia de características (si está disponible)
 try:
     if 'feature_importance' in locals() or 'feature_importance' in globals():
         print(f"\n🔍 FACTORES MÁS INFLUYENTES:")
@@ -696,7 +671,6 @@ print(f"  la efectividad de los programas.")
 print("🎯 RESUMEN EJECUTIVO FINAL")
 print("="*60)
 
-# Estadísticas clave resumidas
 total_pets = len(df_processed)
 fast_adoption_rate = (df_processed['AdoptionSpeed'] <= 2).mean()
 avg_health_score = df_processed['Health_Score'].mean()
@@ -737,14 +711,12 @@ print(f"  4. Reevaluar en 3 meses")
 # ## 10. Exportación de Resultados
 
 # %% [code]
-# Guardar dataset procesado
 try:
     df_processed.to_csv('analisis_mascotas_colab.csv', index=False)
     print("💾 Dataset procesado guardado como 'analisis_mascotas_colab.csv'")
 except Exception as e:
     print(f"❌ Error guardando dataset: {e}")
 
-# Guardar resultados del modelo si están disponibles
 try:
     if not results_df.empty:
         results_df.to_csv('resultados_modelos_colab.csv')
