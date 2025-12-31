@@ -3,17 +3,22 @@ Analytical study on the impact of prevention and care measures to achieve better
 
 This repository contains:
 
-- index.html: General analysis dashboard.
-- detailed_analysis: Analysis dashboard with detailed metrics.
-- training_model: Base code for running the training model to analyze the sample of 3000 entries from the PetFinder dataset.
+<ins>index.html</ins>: General analysis dashboard.  
+<ins>detailed_analysis</ins>: Analysis dashboard with detailed metrics.  
+<ins>training_model</ins>: Base code for running the training model to analyze the sample of 3000 entries from the PetFinder dataset.
 
 ## Methodologies used
-Data sources:
-- PetFinder Dataset: Information on pets available for adoption (age, breed, medical history)
-- Veterinary Medical Databases: Anonymous records of veterinary diagnoses
-- Owner surveys: Data on feeding, exercise, and home environment
-- Climate and geographic data: Influence of the environment on animal health
-- Longitudinal studies on pet aging
+Data sources:    
+
+[PetFinder Dataset](https://www.kaggle.com/competitions/petfinder-adoption-prediction): Information on pets available for adoption (age, breed, medical history)  
+
+Veterinary Medical Databases: Anonymous records of veterinary diagnoses  
+
+Owner surveys: Data on feeding, exercise, and home environment    
+
+Climate and geographic data: Influence of the environment on animal health   
+
+Longitudinal studies on pet aging
 
 ### Key variables to analyze:
 - Demographic: Species, breed, age, weight, sex
