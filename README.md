@@ -7,19 +7,6 @@ This repository contains:
 <ins>detailed_analysis</ins>: Analysis dashboard with detailed metrics.  
 <ins>training_model</ins>: Base code for running the training model to analyze the sample of 3000 entries from the PetFinder dataset.
 
-## Methodologies used
-Data sources:    
-
-[PetFinder Dataset](https://www.kaggle.com/competitions/petfinder-adoption-prediction): Information on pets available for adoption (age, breed, medical history)  
-
-Veterinary Medical Databases: Anonymous records of veterinary diagnoses  
-
-Owner surveys: Data on feeding, exercise, and home environment    
-
-Climate and geographic data: Influence of the environment on animal health   
-
-Longitudinal studies on pet aging
-
 ### Key variables to analyze:
 - Demographic: Species, breed, age, weight, sex
 - Environmental: Type of housing, outdoor access, climate
@@ -55,8 +42,8 @@ assembler = VectorAssembler(
 - Early alerts for common diseases
 
 ## References and initial datasets
-- PetFinder Dataset (Kaggle)
-- Veterinary Medical Database (VMDB)
-- Banfield Pet Hospital State of Pet Health
-- AAHA Canine Life Stage Guidelines
-- International Cat Care longevity studies
+- [PetFinder Dataset](https://www.kaggle.com/competitions/petfinder-adoption-prediction): Information on pets available for adoption (age, breed, medical history)
+- Veterinary Medical Databases: Anonymous records of veterinary diagnoses
+- Owner surveys: Data on feeding, exercise, and home environment
+- Climate and geographic data: Influence of the environment on animal health
+- Longitudinal studies on pet aging
