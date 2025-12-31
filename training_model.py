@@ -9,7 +9,6 @@
 import sys
 import subprocess
 
-# Verificar versiones
 def check_versions():
     import numpy as np
     import scipy
@@ -28,13 +27,12 @@ except Exception as e:
     print("✅ Reinstalación completada. Por favor reinicia el runtime manualmente.")
 
 # %% [markdown]
-# # Análisis de Longevidad de Mascotas
-# ## Configuración del Entorno
+# # Pet Longevity Analysis
+# ## Environmental Settings
 #
-# Este notebook analiza los factores que influyen en la longevidad y adopción de mascotas.
+# This booklet analyzes the factors that influence pet longevity and adoption.
 
 # %% [code]
-# Instalación de paquetes básicos (evitando conflictos)
 !pip install opendatasets kaggle -q
 
 import pandas as pd
@@ -54,7 +52,7 @@ from sklearn.impute import SimpleImputer
 import warnings
 warnings.filterwarnings('ignore')
 
-# Estilo de visualizaciones
+# Visualization Style
 plt.style.use('default')
 sns.set_palette("husl")
 plt.rcParams['figure.figsize'] = (12, 8)
@@ -64,15 +62,13 @@ print(f"📊 Pandas version: {pd.__version__}")
 print(f"🤖 Scikit-learn disponible")
 
 # %% [markdown]
-# ## 1. Creación de Datos de Muestra
+# ## 1. Creating Sample Data
 
 # %% [code]
 def create_simple_sample_dataset():
-    """Crea un dataset de muestra simple y eficiente"""
     np.random.seed(42)
     n_samples = 3000  # Tamaño óptimo para demostración
 
-    # Base de datos
     sample_data = pd.DataFrame({
         'PetID': [f'PET_{i:05d}' for i in range(n_samples)],
         'Age': np.random.randint(1, 180, n_samples),
@@ -90,26 +86,26 @@ def create_simple_sample_dataset():
     
     adoption_speed = np.zeros(n_samples)
 
-    # Factores que aceleran la adopción
+    # Factors that accelerate adoption
     young_mask = sample_data['Age'] < 24  # < 2 años
     sterilized_mask = sample_data['Sterilized'] == 1
     healthy_mask = sample_data['Health'] == 1
     good_care_mask = (sample_data['Vaccinated'] == 1) & (sample_data['Dewormed'] == 1)
 
-    # Asignar velocidades de adopción
-    # Mascotas con múltiples factores positivos
+    # Assign adoption speeds
+    # Pets with multiple positive traits
     excellent_mask = young_mask & sterilized_mask & healthy_mask & good_care_mask
     adoption_speed[excellent_mask] = np.random.choice([0, 1], sum(excellent_mask), p=[0.6, 0.4])
 
-    # Mascotas con algunos factores positivos
+    # Pets with some positive factors
     good_mask = (young_mask | sterilized_mask) & ~excellent_mask
     adoption_speed[good_mask] = np.random.choice([1, 2], sum(good_mask), p=[0.5, 0.5])
 
-    # Mascotas promedio
+    # Average Pets
     average_mask = ~(excellent_mask | good_mask) & (healthy_mask | good_care_mask)
     adoption_speed[average_mask] = np.random.choice([2, 3], sum(average_mask), p=[0.5, 0.5])
 
-    # Mascotas con desafíos
+    # Pets with challenges
     challenge_mask = ~(excellent_mask | good_mask | average_mask)
     adoption_speed[challenge_mask] = np.random.choice([3, 4], sum(challenge_mask), p=[0.4, 0.6])
 
