@@ -4,7 +4,7 @@ This repository contains:
 
 [index.html](index.html): General analysis dashboard.  
 
-<ins>training_model</ins>: Base code for running the training model to analyze the sample of 3000 entries from the PetFinder dataset.
+[training_model](training_model.py): Base code for running the training model to analyze the sample of 3000 entries from the PetFinder dataset.
 
 ### Key variables to analyze:
 - Demographic: Species, breed, age, weight, sex
