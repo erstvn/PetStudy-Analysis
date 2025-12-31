@@ -441,7 +441,7 @@ if 'RandomForest' in models:
 # ## 7. Análisis de Segmentos
 
 # %% [code]
-print("🎯 ANÁLISIS DE SEGMENTOS - CORREGIDO")
+print("🎯 ANÁLISIS DE SEGMENTOS")
 print("="*50)
 
 # Verificar que df_processed existe
@@ -524,28 +524,28 @@ print("📊 RESUMEN DE SEGMENTOS:")
 display(segment_df.round(2))
 
 # %% [code]
-# Visualizar segmentos con heatmaps (CORREGIDO)
+# Visualizar segmentos con heatmaps
 print("📈 Generando visualizaciones de segmentos...")
 
 fig, axes = plt.subplots(2, 2, figsize=(15, 10))
 
 try:
-    # Cantidad por segmento - CORREGIDO
+    # Cantidad por segmento
     pivot_count = segment_df.pivot(index='Species', columns='Size', values='Count')
     sns.heatmap(pivot_count, annot=True, fmt='.0f', cmap='Blues', ax=axes[0,0])
     axes[0,0].set_title('Cantidad de Mascotas por Segmento')
 
-    # Tasa de adopción - CORREGIDO
+    # Tasa de adopción
     pivot_rate = segment_df.pivot(index='Species', columns='Size', values='Adoption_Rate')
     sns.heatmap(pivot_rate, annot=True, fmt='.2%', cmap='YlGnBu', ax=axes[0,1])
     axes[0,1].set_title('Tasa de Adopción por Segmento')
 
-    # Velocidad de adopción - CORREGIDO
+    # Velocidad de adopción
     pivot_speed = segment_df.pivot(index='Species', columns='Size', values='Avg_Adoption_Speed')
     sns.heatmap(pivot_speed, annot=True, fmt='.2f', cmap='RdYlBu_r', ax=axes[1,0])
     axes[1,0].set_title('Velocidad de Adopción Promedio')
 
-    # Edad promedio - CORREGIDO
+    # Edad promedio
     pivot_age = segment_df.pivot(index='Species', columns='Size', values='Avg_Age')
     sns.heatmap(pivot_age, annot=True, fmt='.1f', cmap='viridis', ax=axes[1,1])
     axes[1,1].set_title('Edad Promedio por Segmento')
@@ -754,7 +754,6 @@ try:
 except Exception as e:
     print(f"❌ Error guardando resultados: {e}")
 
-# Guardar análisis de segmentos
 try:
     segment_df.to_csv('segmentos_analisis_colab.csv', index=False)
     print("💾 Análisis de segmentos guardado")
