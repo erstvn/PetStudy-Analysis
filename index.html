@@ -463,12 +463,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     
     <script>
-        // Función para verificar si Chart.js está cargado
+
         function isChartLoaded() {
             return typeof Chart !== 'undefined' && Chart !== null;
         }
 
-        // Función para inicializar gráficos cuando Chart.js esté listo
+
         function initializeCharts() {
             if (!isChartLoaded()) {
                 console.log('Chart.js no está cargado, reintentando...');
@@ -483,7 +483,7 @@
                 loader.style.display = 'none';
             });
 
-            // Inicializar todos los gráficos
+
             createLongevityDistributionChart();
             createFactorsChart();
             createSpeciesChart();
@@ -492,7 +492,7 @@
             createClassificationModelsChart();
         }
 
-        // Función para cambiar entre pestañas de modelos
+
         function showModelTab(tabName) {
             // Ocultar todos los contenidos de pestañas
             document.querySelectorAll('.model-tab-content').forEach(tab => {
@@ -509,7 +509,7 @@
             event.target.classList.add('active');
         }
 
-        // Gráfico de distribución de longevidad
+
         function createLongevityDistributionChart() {
             const ctx = document.getElementById('longevityDistributionChart').getContext('2d');
             new Chart(ctx, {
@@ -551,7 +551,6 @@
             });
         }
 
-        // Gráfico de factores que influyen
         function createFactorsChart() {
             const ctx = document.getElementById('factorsChart').getContext('2d');
             new Chart(ctx, {
@@ -581,7 +580,6 @@
             });
         }
 
-        // Gráfico de especies
         function createSpeciesChart() {
             const ctx = document.getElementById('speciesChart').getContext('2d');
             new Chart(ctx, {
@@ -607,7 +605,6 @@
             });
         }
 
-        // Gráfico de segmentos
         function createSegmentsChart() {
             const ctx = document.getElementById('segmentsChart').getContext('2d');
             new Chart(ctx, {
@@ -640,7 +637,6 @@
             });
         }
 
-        // Gráfico de modelos de regresión
         function createRegressionModelsChart() {
             const ctx = document.getElementById('regressionModelsChart').getContext('2d');
             new Chart(ctx, {
@@ -671,7 +667,6 @@
             });
         }
 
-        // Gráfico de modelos de clasificación
         function createClassificationModelsChart() {
             const ctx = document.getElementById('classificationModelsChart').getContext('2d');
             new Chart(ctx, {
@@ -698,7 +693,6 @@
             });
         }
 
-        // Datos de ejemplo basados en el análisis
         const sampleData = [
             { id: 'PET_00001', species: 'Perro', age: 3.2, size: 'Mediano', longevity: 14.5, category: 'Alta', health: 4 },
             { id: 'PET_00002', species: 'Gato', age: 2.5, size: 'Pequeño', longevity: 15.2, category: 'Alta', health: 5 },
@@ -712,7 +706,6 @@
             { id: 'PET_00010', species: 'Perro', age: 6.4, size: 'Extra Grande', longevity: 10.2, category: 'Baja', health: 3 }
         ];
 
-        // Llenar tabla con datos de muestra
         const tableBody = document.getElementById('sampleDataTable');
         sampleData.forEach(pet => {
             const row = document.createElement('tr');
@@ -732,15 +725,12 @@
             tableBody.appendChild(row);
         });
 
-        // Fecha actual
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES');
 
-        // Inicializar gráficos cuando la página esté cargada
         document.addEventListener('DOMContentLoaded', function() {
             initializeCharts();
         });
 
-        // Fallback: si después de 5 segundos Chart.js no carga, mostrar mensaje
         setTimeout(function() {
             if (!isChartLoaded()) {
                 document.querySelectorAll('.loading').forEach(loader => {
@@ -752,4 +742,3 @@
 </body>
 
 </html>
-
