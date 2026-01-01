@@ -62,5 +62,5 @@ assembler = VectorAssembler(
 - Longitudinal studies on pet aging
   
 <p align="right">
-  <img src="assets/transparent-cat-ezgif.com-gif-maker.gif" width="50"/>
+  <img src="assets/transparent-cat-ezgif.com-gif-maker.gif" width="70"/>
 </p>
