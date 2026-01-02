@@ -60,7 +60,3 @@ assembler = VectorAssembler(
 - Owner surveys: Data on feeding, exercise, and home environment
 - Climate and geographic data: Influence of the environment on animal health
 - Longitudinal studies on pet aging
-  
-<p align="right">
-  <img src="assets/transparent-cat-ezgif.com-gif-maker.gif" width="70"/>
-</p>
