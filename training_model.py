@@ -722,4 +722,3 @@ print(f"  ✅ Visualizaciones: Gráficos generados")
 print(f"  ✅ Recomendaciones: Estrategias identificadas")
 
 print(f"\n🎉 ¡ANÁLISIS COMPLETADO EXITOSAMENTE!")
-print(f"⭐ Los archivos están listos para descargar desde el panel de archivos de Colab.")
