@@ -14,15 +14,15 @@ def check_versions():
     print(f"NumPy version: {np.__version__}")
     print(f"SciPy version: {scipy.__version__}")
     print(f"Seaborn version: {sns.__version__}")
-    print("✅ Bibliotecas cargadas correctamente")
+    print("Bibliotecas cargadas correctamente")
 
 try:
     check_versions()
 except Exception as e:
-    print(f"❌ Error: {e}")
-    print("🔄 Reiniciando instalación...")
+    print(f"Error: {e}")
+    print("Reiniciando instalación...")
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "numpy", "scipy", "seaborn"])
-    print("✅ Reinstalación completada. Por favor reinicia el runtime manualmente.")
+    print("Reinstalación completada. Por favor reinicia el runtime manualmente.")
 
 # %% [markdown]
 # # Pet Longevity Analysis
@@ -55,9 +55,9 @@ plt.style.use('default')
 sns.set_palette("husl")
 plt.rcParams['figure.figsize'] = (12, 8)
 
-print("✅ Entorno Google Colab configurado correctamente")
-print(f"📊 Pandas version: {pd.__version__}")
-print(f"🤖 Scikit-learn disponible")
+print("Entorno Google Colab configurado correctamente")
+print(f"Pandas version: {pd.__version__}")
+print(f"Scikit-learn disponible")
 
 # %% [markdown]
 # ## 1. Creating Sample Data
@@ -113,9 +113,9 @@ def create_simple_sample_dataset():
 
 df = create_simple_sample_dataset()
 
-print("✅ Dataset de muestra creado exitosamente")
-print(f"📊 Dimensiones: {df.shape}")
-print("\n🔍 Primeras filas:")
+print("Dataset de muestra creado exitosamente")
+print(f"Dimensiones: {df.shape}")
+print("\nPrimeras filas:")
 display(df.head())
 
 # %% [markdown]
@@ -130,10 +130,10 @@ print(f"Total de características: {len(df.columns)}")
 print(f"\nValores faltantes por columna:")
 print(df.isnull().sum())
 
-print(f"\n📈 Estadísticas descriptivas:")
+print(f"\nEstadísticas descriptivas:")
 print(df.describe())
 
-print(f"\n🎯 Distribución de AdoptionSpeed:")
+print(f"\nDistribución de AdoptionSpeed:")
 adoption_dist = df['AdoptionSpeed'].value_counts().sort_index()
 for speed, count in adoption_dist.items():
     pct = (count / len(df)) * 100
@@ -144,7 +144,7 @@ for speed, count in adoption_dist.items():
 # ## 3. Data Preprocessing
 
 # %% [code]
-print("🔄 PREPROCESAMIENTO DE DATOS")
+print("PREPROCESAMIENTO DE DATOS")
 print("="*50)
 
 # Create copy for processing
@@ -185,9 +185,9 @@ df_processed['Health_Status'] = df_processed['Health'].map(health_map)
 gender_map = {1: 'Macho', 2: 'Hembra'}
 df_processed['Gender_Text'] = df_processed['Gender'].map(gender_map)
 
-print("✅ Preprocesamiento completado")
-print(f"📊 Nuevas dimensiones: {df_processed.shape}")
-print("\n🔍 Columnas creadas:")
+print("Preprocesamiento completado")
+print(f"Nuevas dimensiones: {df_processed.shape}")
+print("\nColumnas creadas:")
 new_columns = [col for col in df_processed.columns if col not in df.columns]
 print(new_columns)
 
@@ -195,7 +195,7 @@ print(new_columns)
 # ## 4. Main Visualizations
 
 # %% [code]
-print("📊 VISUALIZACIONES PRINCIPALES")
+print("VISUALIZACIONES PRINCIPALES")
 print("="*50)
 
 fig, axes = plt.subplots(2, 3, figsize=(18, 12))
@@ -273,10 +273,10 @@ plt.show()
 # ## 5. Statistical Analysis
 
 # %% [code]
-print("📈 ANÁLISIS ESTADÍSTICO")
+print("ANÁLISIS ESTADÍSTICO")
 print("="*50)
 
-print("📊 ESTADÍSTICAS POR ESPECIE:")
+print("ESTADÍSTICAS POR ESPECIE:")
 species_stats = df_processed.groupby('Species').agg({
     'AdoptionSpeed': ['mean', 'std'],
     'Age_Years': ['mean', 'std'],
@@ -297,13 +297,13 @@ for feature, corr in correlations.items():
 # Rapid adoption rate
 fast_adoption = len(df_processed[df_processed['AdoptionSpeed'] <= 2])
 fast_rate = (fast_adoption / len(df_processed)) * 100
-print(f"\n🚀 Tasa de adopción rápida (≤2): {fast_adoption:,} mascotas ({fast_rate:.1f}%)")
+print(f"\nTasa de adopción rápida (≤2): {fast_adoption:,} mascotas ({fast_rate:.1f}%)")
 
 # %% [markdown]
 # ## 6. Simple Predictive Modeling
 
 # %% [code]
-print("🤖 MODELADO PREDICTIVO")
+print("MODELADO PREDICTIVO")
 print("="*50)
 
 features = ['Age_Years', 'Health_Score', 'Fee', 'PhotoAmt', 'MaturitySize']
@@ -320,15 +320,15 @@ features.extend(['Species_Encoded', 'Size_Encoded'])
 X = df_model[features]
 y = df_model['AdoptionSpeed']
 
-print(f"✅ Características seleccionadas: {len(features)}")
+print(f"Características seleccionadas: {len(features)}")
 print(f"Características: {features}")
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-print(f"📊 Conjunto de entrenamiento: {X_train.shape[0]} registros")
-print(f"📊 Conjunto de prueba: {X_test.shape[0]} registros")
+print(f"Conjunto de entrenamiento: {X_train.shape[0]} registros")
+print(f"Conjunto de prueba: {X_test.shape[0]} registros")
 
 models = {
     'RandomForest': RandomForestRegressor(n_estimators=50, random_state=42),
@@ -338,7 +338,7 @@ models = {
 results = {}
 
 for name, model in models.items():
-    print(f"\n🎯 Entrenando {name}...")
+    print(f"\nEntrenando {name}...")
 
     model.fit(X_train, y_train)
 
@@ -360,12 +360,12 @@ for name, model in models.items():
         'CV_Std': cv_scores.std()
     }
 
-    print(f"   ✅ R²: {r2:.4f}")
-    print(f"   ✅ RMSE: {rmse:.4f}")
-    print(f"   ✅ MAE: {mae:.4f}")
-    print(f"   ✅ Validación cruzada: {cv_scores.mean():.4f} ± {cv_scores.std():.4f}")
+    print(f"    R²: {r2:.4f}")
+    print(f"    RMSE: {rmse:.4f}")
+    print(f"    MAE: {mae:.4f}")
+    print(f"    Validación cruzada: {cv_scores.mean():.4f} ± {cv_scores.std():.4f}")
 
-print(f"\n📊 COMPARACIÓN DE MODELOS:")
+print(f"\n COMPARACIÓN DE MODELOS:")
 results_df = pd.DataFrame(results).T
 display(results_df.round(4))
 
@@ -396,7 +396,7 @@ if 'RandomForest' in models:
         'importance': rf_model.feature_importances_
     }).sort_values('importance', ascending=False)
 
-    print(f"\n🔍 IMPORTANCIA DE CARACTERÍSTICAS (RandomForest):")
+    print(f"\n IMPORTANCIA DE CARACTERÍSTICAS (RandomForest):")
     display(feature_importance)
 
     plt.figure(figsize=(10, 6))
@@ -411,27 +411,27 @@ if 'RandomForest' in models:
 # ## 7. Análisis de Segmentos
 
 # %% [code]
-print("🎯 ANÁLISIS DE SEGMENTOS")
+print(" ANÁLISIS DE SEGMENTOS")
 print("="*50)
 
 if 'df_processed' not in locals() and 'df_processed' not in globals():
-    print("❌ Error: df_processed no está definido")
-    print("🔄 Ejecutando preprocesamiento...")
+    print("Error: df_processed no está definido")
+    print("Ejecutando preprocesamiento...")
 
     preprocessor = ColabDataPreprocessor()
     df_processed = preprocessor.preprocess_data(df)
 else:
-    print("✅ df_processed disponible")
+    print("df_processed disponible")
 
 if 'df_processed' in locals() or 'df_processed' in globals():
-    print(f"📊 Dataset disponible: {df_processed.shape}")
+    print(f"Dataset disponible: {df_processed.shape}")
 
     required_columns = ['Species', 'Size_Category', 'Age_Years', 'Health_Score', 'AdoptionSpeed', 'Fee']
     missing_columns = [col for col in required_columns if col not in df_processed.columns]
 
     if missing_columns:
-        print(f"❌ Faltan columnas: {missing_columns}")
-        print("🔄 Creando columnas faltantes...")
+        print(f"Faltan columnas: {missing_columns}")
+        print("Creando columnas faltantes...")
 
         if 'Health_Score' not in df_processed.columns and 'Health_Care_Score' in df_processed.columns:
             df_processed['Health_Score'] = df_processed['Health_Care_Score']
@@ -439,13 +439,13 @@ if 'df_processed' in locals() or 'df_processed' in globals():
         # Verificar nuevamente
         missing_columns = [col for col in required_columns if col not in df_processed.columns]
         if missing_columns:
-            print(f"❌ No se pudieron crear todas las columnas: {missing_columns}")
+            print(f"No se pudieron crear todas las columnas: {missing_columns}")
         else:
-            print("✅ Todas las columnas necesarias disponibles")
+            print("Todas las columnas necesarias disponibles")
     else:
-        print("✅ Todas las columnas necesarias disponibles")
+        print("Todas las columnas necesarias disponibles")
 else:
-    print("❌ No se pudo acceder a los datos procesados")
+    print("No se pudo acceder a los datos procesados")
     # Salir del análisis si no hay datos
     raise NameError("df_processed no está disponible para el análisis de segmentos")
 
@@ -484,7 +484,7 @@ for species, sizes in segments.items():
         })
 
 segment_df = pd.DataFrame(segment_list)
-print("📊 RESUMEN DE SEGMENTOS:")
+print("RESUMEN DE SEGMENTOS:")
 display(segment_df.round(2))
 
 # %% [code]
@@ -516,11 +516,11 @@ try:
 
     plt.tight_layout()
     plt.show()
-    print("✅ Visualizaciones generadas exitosamente")
+    print("Visualizaciones generadas exitosamente")
 
 except Exception as e:
-    print(f"❌ Error en visualizaciones: {e}")
-    print("🔄 Generando visualizaciones alternativas...")
+    print(f"Error en visualizaciones: {e}")
+    print("Generando visualizaciones alternativas...")
 
     # Simple alternative visualizations
     fig, axes = plt.subplots(2, 2, figsize=(15, 10))
@@ -554,7 +554,7 @@ except Exception as e:
 # ## 8. Recommendations and Conclusions
 
 # %% [code]
-print("💡 RECOMENDACIONES ESTRATÉGICAS")
+print("RECOMENDACIONES ESTRATÉGICAS")
 print("="*50)
 
 if 'results' not in locals() and 'results' not in globals():
@@ -582,7 +582,7 @@ for species, sizes in segments.items():
             })
 
 if problem_segments:
-    print("🚨 SEGMENTOS QUE REQUIEREN ATENCIÓN:")
+    print("SEGMENTOS QUE REQUIEREN ATENCIÓN:")
     for seg in problem_segments:
         print(f"\n• {seg['segment']}:")
         print(f"  - Tasa de adopción: {seg['adoption_rate']:.1%}")
@@ -598,19 +598,19 @@ if problem_segments:
         if recommendations:
             print(f"  - Recomendaciones: {', '.join(recommendations)}")
 else:
-    print("✅ Todos los segmentos tienen buen desempeño")
+    print("Todos los segmentos tienen buen desempeño")
 
 if high_performance_segments:
-    print(f"\n✅ SEGMENTOS DE ALTO DESEMPEÑO:")
+    print(f"\nSEGMENTOS DE ALTO DESEMPEÑO:")
     for seg in high_performance_segments:
         print(f"  • {seg['segment']}: {seg['adoption_rate']:.1%}")
         print(f"    - Replicar estrategias exitosas")
 else:
-    print(f"\n📊 TODOS LOS SEGMENTOS ANALIZADOS:")
+    print(f"\nTODOS LOS SEGMENTOS ANALIZADOS:")
 
-print(f"\n🔍 HALLAZGOS PRINCIPALES:")
-print(f"  1. 📊 Dataset analizado: {len(df_processed):,} mascotas")
-print(f"  2. 🎯 Tasa adopción general: {(df_processed['AdoptionSpeed'] <= 2).mean():.1%}")
+print(f"\nHALLAZGOS PRINCIPALES:")
+print(f"  1. Dataset analizado: {len(df_processed):,} mascotas")
+print(f"  2. Tasa adopción general: {(df_processed['AdoptionSpeed'] <= 2).mean():.1%}")
 
 # Analysis of important correlations
 try:
@@ -618,30 +618,30 @@ try:
     age_corr = df_processed['Age_Years'].corr(df_processed['AdoptionSpeed'])
     young_pets = len(df_processed[df_processed['Age_Years'] < 2])
 
-    print(f"\n📈 CORRELACIONES DESTACADAS:")
+    print(f"\nCORRELACIONES DESTACADAS:")
     print(f"  • Salud vs Adopción: {health_corr:.3f}")
     print(f"  • Edad vs Adopción: {age_corr:.3f}")
     print(f"  • Mascotas jóvenes (<2 años): {young_pets:,}")
 
 except Exception as e:
-    print(f"⚠️  No se pudieron calcular correlaciones: {e}")
+    print(f"No se pudieron calcular correlaciones: {e}")
 
 try:
     if 'feature_importance' in locals() or 'feature_importance' in globals():
-        print(f"\n🔍 FACTORES MÁS INFLUYENTES:")
+        print(f"\nFACTORES MÁS INFLUYENTES:")
         feature_importance_sorted = feature_importance.sort_values('importance', ascending=False)
         for idx, row in feature_importance_sorted.head(3).iterrows():
             print(f"  • {row['feature']}: {row['importance']:.3f}")
     else:
-        print(f"\n🔍 FACTORES CLAVE IDENTIFICADOS:")
+        print(f"\nFACTORES CLAVE IDENTIFICADOS:")
         print(f"  • Edad de la mascota")
         print(f"  • Estado de salud")
         print(f"  • Especie y tamaño")
 
 except Exception as e:
-    print(f"⚠️  No se pudo acceder a importancia de características: {e}")
+    print(f"⚠️ No se pudo acceder a importancia de características: {e}")
 
-print(f"\n⭐ CONCLUSIÓN:")
+print(f"\nCONCLUSIÓN:")
 print(f"  El análisis identifica oportunidades para optimizar")
 print(f"  las estrategias de adopción mediante segmentación.")
 print(f"  El enfoque en factores clave puede mejorar significativamente")
@@ -651,7 +651,7 @@ print(f"  la efectividad de los programas.")
 # ## 9. Final Executive Summary
 
 # %% [code]
-print("🎯 RESUMEN EJECUTIVO FINAL")
+print("RESUMEN EJECUTIVO FINAL")
 print("="*60)
 
 total_pets = len(df_processed)
@@ -665,26 +665,26 @@ except:
     best_model = "No disponible"
     best_r2 = 0
 
-print(f"\n📊 MÉTRICAS CLAVE:")
+print(f"\nMÉTRICAS CLAVE:")
 print(f"  • Mascotas analizadas: {total_pets:,}")
 print(f"  • Tasa de adopción rápida: {fast_adoption_rate:.1%}")
 print(f"  • Puntaje de salud promedio: {avg_health_score:.1f}/4")
 print(f"  • Mejor modelo predictivo: {best_model}")
 print(f"  • Capacidad predictiva (R²): {best_r2:.3f}")
 
-print(f"\n🎯 RECOMENDACIONES ESTRATÉGICAS:")
-print(f"  1. 🏥 ENFOQUE EN SALUD: Mejorar cuidados médicos básicos")
-print(f"  2. 🐕‍🦺 PROGRAMAS POR EDAD: Estrategias diferenciadas por edad")
-print(f"  3. 📊 SEGMENTACIÓN: Personalizar por especie y tamaño")
-print(f"  4. 💰 TARIFAS: Revisar estructura para optimización")
-print(f"  5. 📈 MONITOREO: Seguimiento continuo de métricas clave")
+print(f"\nRECOMENDACIONES ESTRATÉGICAS:")
+print(f"  1.  ENFOQUE EN SALUD: Mejorar cuidados médicos básicos")
+print(f"  2.  PROGRAMAS POR EDAD: Estrategias diferenciadas por edad")
+print(f"  3.  SEGMENTACIÓN: Personalizar por especie y tamaño")
+print(f"  4.  TARIFAS: Revisar estructura para optimización")
+print(f"  5.  MONITOREO: Seguimiento continuo de métricas clave")
 
-print(f"\n📈 IMPACTO ESPERADO:")
+print(f"\nIMPACTO ESPERADO:")
 print(f"  • Mejora en tasas de adopción: +5-10%")
 print(f"  • Reducción tiempo de espera: -15-25%")
 print(f"  • Optimización recursos: Enfoque en factores clave")
 
-print(f"\n🚀 PRÓXIMOS PASOS:")
+print(f"\nPRÓXIMOS PASOS:")
 print(f"  1. Implementar programa de salud mejorado")
 print(f"  2. Desarrollar campañas por segmento")
 print(f"  3. Establecer sistema de monitoreo")
@@ -698,7 +698,7 @@ try:
     df_processed.to_csv('analisis_mascotas_colab.csv', index=False)
     print("💾 Dataset procesado guardado como 'analisis_mascotas_colab.csv'")
 except Exception as e:
-    print(f"❌ Error guardando dataset: {e}")
+    print(f"Error guardando dataset: {e}")
 
 try:
     if not results_df.empty:
@@ -707,18 +707,18 @@ try:
     else:
         print("⚠️  No hay resultados de modelos para guardar")
 except Exception as e:
-    print(f"❌ Error guardando resultados: {e}")
+    print(f"Error guardando resultados: {e}")
 
 try:
     segment_df.to_csv('segmentos_analisis_colab.csv', index=False)
-    print("💾 Análisis de segmentos guardado")
+    print("Análisis de segmentos guardado")
 except Exception as e:
-    print(f"❌ Error guardando segmentos: {e}")
+    print(f"Error guardando segmentos: {e}")
 
 print(f"\n📋 REPORTE FINAL:")
-print(f"  ✅ Preprocesamiento: {df_processed.shape[0]:,} registros procesados")
-print(f"  ✅ Segmentos: {len(segment_df)} combinaciones analizadas")
-print(f"  ✅ Visualizaciones: Gráficos generados")
-print(f"  ✅ Recomendaciones: Estrategias identificadas")
+print(f"  Preprocesamiento: {df_processed.shape[0]:,} registros procesados")
+print(f"  Segmentos: {len(segment_df)} combinaciones analizadas")
+print(f"  Visualizaciones: Gráficos generados")
+print(f"  Recomendaciones: Estrategias identificadas")
 
-print(f"\n🎉 ¡ANÁLISIS COMPLETADO EXITOSAMENTE!")
+print(f"\n¡ANÁLISIS COMPLETADO EXITOSAMENTE!")
