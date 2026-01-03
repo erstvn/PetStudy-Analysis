@@ -27,8 +27,8 @@
 - Health: Chronic diseases, vaccination, sterilization
 
 ## References and initial datasets
-[PetFinder Dataset](https://www.kaggle.com/competitions/petfinder-adoption-prediction): Information on pets available for adoption (age, breed, medical history)  
-Veterinary Medical Databases: Anonymous records of veterinary diagnoses  
-Owner surveys: Data on feeding, exercise, and home environment  
-Climate and geographic data: Influence of the environment on animal health  
-Longitudinal studies on pet aging
+**[PetFinder Dataset](https://www.kaggle.com/competitions/petfinder-adoption-prediction)**: Information on pets available for adoption (age, breed, medical history)  
+**Veterinary Medical Databases**: Anonymous records of veterinary diagnoses  
+**Owner surveys**: Data on feeding, exercise, and home environment  
+**Climate and geographic data**: Influence of the environment on animal health  
+**Longitudinal studies on pet aging**
