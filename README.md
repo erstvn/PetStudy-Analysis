@@ -52,7 +52,6 @@ assembler = VectorAssembler(
 ### Phase 4: Educational Visualization
 - Interactive dashboard for pet owners
 - Care guides by life stage
-- Early alerts for common diseases
 
 ## References and initial datasets
 - [PetFinder Dataset](https://www.kaggle.com/competitions/petfinder-adoption-prediction): Information on pets available for adoption (age, breed, medical history)
