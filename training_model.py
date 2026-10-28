@@ -122,7 +122,7 @@ display(df.head())
 # ## 2. Initial Exploratory Analysis
 
 # %% [code]
-print("📊 ANÁLISIS EXPLORATORIO INICIAL")
+print("ANÁLISIS EXPLORATORIO INICIAL")
 print("="*50)
 
 print(f"Total de registros: {len(df):,}")
@@ -489,7 +489,7 @@ display(segment_df.round(2))
 
 # %% [code]
 # Visualize segments with heatmaps
-print("📈 Generando visualizaciones de segmentos...")
+print("Generando visualizaciones de segmentos...")
 
 fig, axes = plt.subplots(2, 2, figsize=(15, 10))
 
@@ -558,7 +558,7 @@ print("RECOMENDACIONES ESTRATÉGICAS")
 print("="*50)
 
 if 'results' not in locals() and 'results' not in globals():
-    print("⚠️  No hay resultados de modelos disponibles")
+    print("No hay resultados de modelos disponibles")
     results = {}
     results_df = pd.DataFrame()
 
@@ -639,7 +639,7 @@ try:
         print(f"  • Especie y tamaño")
 
 except Exception as e:
-    print(f"⚠️ No se pudo acceder a importancia de características: {e}")
+    print(f"No se pudo acceder a importancia de características: {e}")
 
 print(f"\nCONCLUSIÓN:")
 print(f"  El análisis identifica oportunidades para optimizar")
@@ -696,16 +696,16 @@ print(f"  4. Reevaluar en 3 meses")
 # %% [code]
 try:
     df_processed.to_csv('analisis_mascotas_colab.csv', index=False)
-    print("💾 Dataset procesado guardado como 'analisis_mascotas_colab.csv'")
+    print("Dataset procesado guardado como 'analisis_mascotas_colab.csv'")
 except Exception as e:
     print(f"Error guardando dataset: {e}")
 
 try:
     if not results_df.empty:
         results_df.to_csv('resultados_modelos_colab.csv')
-        print("💾 Resultados de modelos guardados")
+        print("Resultados de modelos guardados")
     else:
-        print("⚠️  No hay resultados de modelos para guardar")
+        print("No hay resultados de modelos para guardar")
 except Exception as e:
     print(f"Error guardando resultados: {e}")
 
@@ -715,7 +715,7 @@ try:
 except Exception as e:
     print(f"Error guardando segmentos: {e}")
 
-print(f"\n📋 REPORTE FINAL:")
+print(f"\nREPORTE FINAL:")
 print(f"  Preprocesamiento: {df_processed.shape[0]:,} registros procesados")
 print(f"  Segmentos: {len(segment_df)} combinaciones analizadas")
 print(f"  Visualizaciones: Gráficos generados")
